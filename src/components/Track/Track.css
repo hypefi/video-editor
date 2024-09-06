@@ -1,0 +1,63 @@
+.track {
+    position: relative;
+    height: 80px;
+    margin-bottom: 10px;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+  }
+  
+  .track-label {
+    width: 100px;
+    min-width: 100px;
+    background-color: #3a3a3a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-transform: capitalize;
+    border-right: 1px solid #1a1a1a;
+  }
+  
+  .track-content {
+    flex-grow: 1;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .track.video .track-label {
+    background-color: #4285f4;
+  }
+  
+  .track.music .track-label {
+    background-color: #ea4335;
+  }
+  
+  .track.captions .track-label {
+    background-color: #fbbc05;
+  }
+  
+  .track.narration .track-label {
+    background-color: #34a853;
+  }
+  
+  /* Scrollbar styles */
+  .track-content::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .track-content::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+  
+  .track-content::-webkit-scrollbar-thumb {
+    background-color: #4a4a4a;
+    border-radius: 4px;
+  }
+  
+  .track-content::-webkit-scrollbar-thumb:hover {
+    background-color: #5a5a5a;
+  }

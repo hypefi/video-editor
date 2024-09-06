@@ -1,12 +1,17 @@
 import React from 'react';
+import Clip from '../Clip/Clip';
+import './Track.css';
 
-function Track({ type, clips, setTracks }) {
+function Track({ type, clips, setTracks, duration }) {
   const handleDrop = (e) => {
     e.preventDefault();
     const clipData = JSON.parse(e.dataTransfer.getData('text/plain'));
+    const trackRect = e.currentTarget.getBoundingClientRect();
+    const dropPosition = (e.clientX - trackRect.left) / 10; // 10px per second
+
     setTracks((prevTracks) => ({
       ...prevTracks,
-      [type]: [...prevTracks[type], clipData],
+      [type]: [...prevTracks[type], { ...clipData, start: dropPosition, duration: 30 }],
     }));
   };
 
@@ -15,13 +20,14 @@ function Track({ type, clips, setTracks }) {
       className={`track ${type}`}
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleDrop}
+      style={{ width: `${duration * 10}px` }}
     >
-      <h3>{type}</h3>
-      {clips.map((clip, index) => (
-        <div key={index} className="clip">
-          {clip.name}
-        </div>
-      ))}
+      <div className="track-label">{type}</div>
+      <div className="track-content">
+        {clips.map((clip, index) => (
+          <Clip key={index} clip={clip} trackType={type} setTracks={setTracks} />
+        ))}
+      </div>
     </div>
   );
 }

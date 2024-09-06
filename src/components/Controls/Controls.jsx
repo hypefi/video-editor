@@ -6,7 +6,7 @@ function Controls({ setTracks }) {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+    if (file && file.type.startsWith('video/')) {
       const reader = new FileReader();
       reader.onload = (event) => {
         const clipData = {

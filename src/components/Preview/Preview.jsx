@@ -1,24 +1,26 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './Preview.css';
 
 function Preview({ tracks }) {
   const videoRef = useRef(null);
+  const [currentVideo, setCurrentVideo] = useState(null);
 
   useEffect(() => {
-    // Here you would implement the logic to combine all tracks
-    // and update the video source
-    // For now, we'll just use the first video track if available
     const videoTrack = tracks.video[0];
-    if (videoTrack && videoRef.current) {
-      videoRef.current.src = videoTrack.src;
+    if (videoTrack && videoTrack.src !== currentVideo) {
+      setCurrentVideo(videoTrack.src);
     }
-  }, [tracks]);
+  }, [tracks, currentVideo]);
 
   return (
     <div className="preview">
-      <video ref={videoRef} controls>
-        Your browser does not support the video tag.
-      </video>
+      {currentVideo ? (
+        <video ref={videoRef} src={currentVideo} controls>
+          Your browser does not support the video tag.
+        </video>
+      ) : (
+        <div className="placeholder">No video selected</div>
+      )}
     </div>
   );
 }
