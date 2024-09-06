@@ -1,10 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Track from '../Track/Track';
 import './Timeline.css';
 
 function Timeline({ tracks, setTracks }) {
-  const [duration, setDuration] = useState(300); // 5 minutes in seconds
+  const [duration, setDuration] = useState(300); // Default 5 minutes in seconds
   const timelineRef = useRef(null);
+
+  useEffect(() => {
+    const maxDuration = Object.values(tracks).reduce((max, trackClips) => {
+      const trackDuration = trackClips.reduce((sum, clip) => Math.max(sum, clip.start + clip.duration), 0);
+      return Math.max(max, trackDuration);
+    }, 0);
+    setDuration(Math.max(300, Math.ceil(maxDuration / 30) * 30)); // Round up to nearest 30 seconds
+  }, [tracks]);
 
   const renderTimeRuler = () => {
     const markers = [];

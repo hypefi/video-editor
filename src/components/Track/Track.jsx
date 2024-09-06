@@ -11,7 +11,7 @@ function Track({ type, clips, setTracks, duration }) {
 
     setTracks((prevTracks) => ({
       ...prevTracks,
-      [type]: [...prevTracks[type], { ...clipData, start: dropPosition, duration: 30 }],
+      [type]: [...prevTracks[type], { ...clipData, start: dropPosition }],
     }));
   };
 

@@ -6,9 +6,19 @@ function Controls({ setTracks }) {
   const musicInputRef = useRef(null);
   const narrationInputRef = useRef(null);
 
-  const handleFileChange = (e, trackType) => {
+  const getMediaDuration = (file) => {
+    return new Promise((resolve) => {
+      const element = file.type.startsWith('video') ? document.createElement('video') : document.createElement('audio');
+      element.preload = 'metadata';
+      element.onloadedmetadata = () => resolve(element.duration);
+      element.src = URL.createObjectURL(file);
+    });
+  };
+
+  const handleFileChange = async (e, trackType) => {
     const file = e.target.files[0];
     if (file) {
+      const duration = await getMediaDuration(file);
       const reader = new FileReader();
       reader.onload = (event) => {
         const clipData = {
@@ -16,7 +26,7 @@ function Controls({ setTracks }) {
           name: file.name,
           src: event.target.result,
           start: 0,
-          duration: 30, // Default duration, you may want to get the actual audio/video duration
+          duration: duration,
         };
         setTracks((prevTracks) => ({
           ...prevTracks,
