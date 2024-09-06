@@ -1,0 +1,38 @@
+.clip {
+    position: absolute;
+    height: 100%;
+    background-color: #4a4a4a;
+    border-radius: 4px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: move;
+    user-select: none;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 5px;
+    box-sizing: border-box;
+  }
+  
+  .clip:hover {
+    background-color: #5a5a5a;
+  }
+  
+  .clip.video {
+    background-color: #4285f4;
+  }
+  
+  .clip.music {
+    background-color: #ea4335;
+  }
+  
+  .clip.captions {
+    background-color: #fbbc05;
+  }
+  
+  .clip.narration {
+    background-color: #34a853;
+  }
