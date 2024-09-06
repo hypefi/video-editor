@@ -2,23 +2,25 @@ import React, { useRef } from 'react';
 import './Controls.css';
 
 function Controls({ setTracks }) {
-  const fileInputRef = useRef(null);
+  const videoInputRef = useRef(null);
+  const musicInputRef = useRef(null);
+  const narrationInputRef = useRef(null);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e, trackType) => {
     const file = e.target.files[0];
-    if (file && file.type.startsWith('video/')) {
+    if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
         const clipData = {
-          type: 'video',
+          type: trackType,
           name: file.name,
           src: event.target.result,
           start: 0,
-          duration: 30, // Default duration, you may want to get the actual video duration
+          duration: 30, // Default duration, you may want to get the actual audio/video duration
         };
         setTracks((prevTracks) => ({
           ...prevTracks,
-          video: [...prevTracks.video, clipData],
+          [trackType]: [...prevTracks[trackType], clipData],
         }));
       };
       reader.readAsDataURL(file);
@@ -30,14 +32,28 @@ function Controls({ setTracks }) {
       <input
         type="file"
         accept="video/*"
-        onChange={handleFileChange}
-        ref={fileInputRef}
+        onChange={(e) => handleFileChange(e, 'video')}
+        ref={videoInputRef}
         style={{ display: 'none' }}
       />
-      <button onClick={() => fileInputRef.current.click()}>Add Video</button>
-      <button>Add Music</button>
+      <input
+        type="file"
+        accept="audio/*"
+        onChange={(e) => handleFileChange(e, 'music')}
+        ref={musicInputRef}
+        style={{ display: 'none' }}
+      />
+      <input
+        type="file"
+        accept="audio/*"
+        onChange={(e) => handleFileChange(e, 'narration')}
+        ref={narrationInputRef}
+        style={{ display: 'none' }}
+      />
+      <button onClick={() => videoInputRef.current.click()}>Add Video</button>
+      <button onClick={() => musicInputRef.current.click()}>Add Music</button>
       <button>Add Captions</button>
-      <button>Add Narration</button>
+      <button onClick={() => narrationInputRef.current.click()}>Add Narration</button>
     </div>
   );
 }

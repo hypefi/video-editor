@@ -6,33 +6,55 @@
     color: #fff;
     display: flex;
     align-items: center;
-    justify-content: center;
     cursor: move;
     user-select: none;
     font-size: 12px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     padding: 0 5px;
     box-sizing: border-box;
-  }
-  
-  .clip:hover {
+}
+
+.clip:hover {
     background-color: #5a5a5a;
-  }
-  
-  .clip.video {
+}
+
+.clip.video {
     background-color: #4285f4;
-  }
-  
-  .clip.music {
+}
+
+.clip.music {
     background-color: #ea4335;
-  }
-  
-  .clip.captions {
-    background-color: #fbbc05;
-  }
-  
-  .clip.narration {
+}
+
+.clip.narration {
     background-color: #34a853;
-  }
+}
+
+.clip-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.clip-video-icon,
+.clip-audio-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.clip-video-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>');
+}
+
+.clip-audio-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/></svg>');
+}
+
+.clip-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

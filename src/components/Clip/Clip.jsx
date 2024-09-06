@@ -42,7 +42,11 @@ function Clip({ clip, trackType, setTracks }) {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      {clip.name}
+      <div className="clip-content">
+        {clip.type === 'video' && <div className="clip-video-icon"></div>}
+        {(clip.type === 'music' || clip.type === 'narration') && <div className="clip-audio-icon"></div>}
+        <span className="clip-name">{clip.name}</span>
+      </div>
     </div>
   );
 }
